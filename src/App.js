@@ -1,9 +1,9 @@
-import * as React from "react";
+import React from "react";
 import Table from "./components/Table";
 
 function App() {
     return (
-        <div>
+        <div className="w-96 h-96">
             <Table />
         </div>
     );
