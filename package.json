@@ -2,6 +2,7 @@
     "name": "coin-tracker",
     "version": "0.1.0",
     "private": true,
+    "proxy": "https://sandbox-api.coinmarketcap.com/",
     "dependencies": {
         "@testing-library/jest-dom": "^5.17.0",
         "@testing-library/react": "^13.4.0",
@@ -36,9 +37,11 @@
         ]
     },
     "devDependencies": {
+        "autoprefixer": "^10.4.15",
         "copy-webpack-plugin": "^11.0.0",
         "css-loader": "^6.8.1",
         "html-webpack-plugin": "^5.5.3",
+        "postcss": "^8.4.28",
         "tailwindcss": "^3.3.3",
         "webpack": "^5.88.2",
         "webpack-cli": "^5.1.4"

@@ -1,7 +1,8 @@
-import React from "react";
+import * as React from "react";
+import Table from "./components/Table";
 
 function App() {
-    return <div>App</div>;
+    return <Table />;
 }
 
 export default App;
