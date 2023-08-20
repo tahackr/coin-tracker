@@ -2,7 +2,11 @@ import * as React from "react";
 import Table from "./components/Table";
 
 function App() {
-    return <Table />;
+    return (
+        <div>
+            <Table />
+        </div>
+    );
 }
 
 export default App;

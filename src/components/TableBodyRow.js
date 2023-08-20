@@ -1,16 +1,13 @@
 import * as React from "react";
+import { TableRow as TR, TableCell as TD } from "@mui/material";
 
 function TableBodyRow({ data }) {
     return (
-        <tr className="text-center border-b">
-            <th className="text-left">Bitcoin</th>
-            <td>1</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-        </tr>
+        <TR className="text-center border-b">
+            <th className="text-left">{data.name}</th>
+            <TD>{data.price}</TD>
+            <TD>{data.change}</TD>
+        </TR>
     );
 }
 
