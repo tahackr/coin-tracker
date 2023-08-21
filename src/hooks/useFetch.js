@@ -7,23 +7,37 @@ function useFetch(url) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const getData = async function () {
+    const source = axios.CancelToken.source();
+
+    const getData = async () => {
       try {
         setIsFetching(true);
 
-        const { data, status } = await axios.get(url);
+        const { data, status } = await axios.get(url, {
+          cancelToken: source.token,
+        });
 
         if (status === 200) {
           setData(data);
         }
       } catch (err) {
-        setError(err);
+        if (axios.isCancel(err)) {
+          // process of canceling timed out requests to avoid performance issues.
+          // You can implement any solution for that scenario; console.log is just a placeholder.
+          console.log("Cancelled fetch request.");
+        } else {
+          setError(err);
+        }
       } finally {
         setIsFetching(false);
       }
     };
 
     getData();
+
+    return () => {
+      source.cancel();
+    };
   }, [url]);
 
   return { data, isFetching, error };
