@@ -4,10 +4,7 @@
         "quote": {
             "USD": {
                 "price": "50000",
-                "volume_24h": "5421512",
-                "percent_change_1h": "2.5",
                 "percent_change_24h": "11.7",
-                "percent_change_7d": "7.45",
                 "market_cap": "1251251241"
             }
         }
@@ -17,10 +14,7 @@
         "quote": {
             "USD": {
                 "price": "3300",
-                "volume_24h": "5421512",
-                "percent_change_1h": "-1.2",
                 "percent_change_24h": "11.7",
-                "percent_change_7d": "7.45",
                 "market_cap": "1251251241"
             }
         }
@@ -30,10 +24,7 @@
         "quote": {
             "USD": {
                 "price": "1.05",
-                "volume_24h": "5421512",
-                "percent_change_1h": "-0.5",
                 "percent_change_24h": "11.7",
-                "percent_change_7d": "7.45",
                 "market_cap": "1251251241"
             }
         }
@@ -43,10 +34,7 @@
         "quote": {
             "USD": {
                 "price": "209",
-                "volume_24h": "5421512",
-                "percent_change_1h": "-3.2",
                 "percent_change_24h": "11.7",
-                "percent_change_7d": "7.45",
                 "market_cap": "1251251241"
             }
         }
@@ -56,10 +44,7 @@
         "quote": {
             "USD": {
                 "price": "0.5",
-                "volume_24h": "5421512",
-                "percent_change_1h": "-18.5",
                 "percent_change_24h": "11.7",
-                "percent_change_7d": "7.45",
                 "market_cap": "1251251241"
             }
         }
@@ -69,10 +54,7 @@
         "quote": {
             "USD": {
                 "price": "0.06021",
-                "volume_24h": "5421512",
-                "percent_change_1h": "-2.83",
                 "percent_change_24h": "11.7",
-                "percent_change_7d": "7.45",
                 "market_cap": "1251251241"
             }
         }
@@ -82,10 +64,7 @@
         "quote": {
             "USD": {
                 "price": "21.08",
-                "volume_24h": "5421512",
-                "percent_change_1h": "0.49",
                 "percent_change_24h": "11.7",
-                "percent_change_7d": "7.45",
                 "market_cap": "1251251241"
             }
         }
@@ -95,10 +74,7 @@
         "quote": {
             "USD": {
                 "price": "0.07449",
-                "volume_24h": "5421512",
-                "percent_change_1h": "-3.80",
                 "percent_change_24h": "11.7",
-                "percent_change_7d": "7.45",
                 "market_cap": "1251251241"
             }
         }
@@ -108,10 +84,7 @@
         "quote": {
             "USD": {
                 "price": "65.91",
-                "volume_24h": "5421512",
-                "percent_change_1h": "1.98",
                 "percent_change_24h": "11.7",
-                "percent_change_7d": "7.45",
                 "market_cap": "1251251241"
             }
         }
