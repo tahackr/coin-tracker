@@ -1,47 +1,42 @@
-//import axios from "axios";
 import React from "react";
 import {
-    Table as TableMUI,
-    TableHead,
-    TableBody,
-    TableRow,
-    TableCell as TD,
+  Table as MUITable,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
 } from "@mui/material";
 import TableBodyRow from "./TableBodyRow";
-import useFetch from "../hooks/use-fetch";
+import useFetch from "../hooks/useFetch";
 
 function Table() {
-    //todos
-    //const renderedRows = data.map((data) => <TableBodyRow data={data} />);
-    // data maplerken her data objesinde quote.USD ye bak
-    // burda .price .percent_change_1h .percent_change_24h .percent_change_7d
+  const { data: coins, isFetching, error } = useFetch("/src/data/coins.json");
 
-    const { data, isFetching, error } = useFetch("http://localhost:3004/data");
-    // Skeleton for isFetching???
-    let renderedRows;
-    let content;
-    if (error) {
-        content = <div>{error.message}</div>;
-    } else {
-        if (data) {
-            renderedRows = data.map((data) => <TableBodyRow data={data} />);
-        }
+  if (error) {
+    return <div>{error.message}</div>;
+  }
 
-        content = (
-            <TableMUI className="block p-2">
-                <TableHead>
-                    <TableRow>
-                        <TD>Name</TD>
-                        <TD>Price</TD>
-                        <TD>Change</TD>
-                    </TableRow>
-                </TableHead>
-                <TableBody>{renderedRows}</TableBody>
-            </TableMUI>
-        );
-    }
+  if (isFetching) {
+    // Replace this with your desired loading state or a skeleton
+    return <div>Loading...</div>;
+  }
 
-    return content;
+  return (
+    <MUITable className="block p-2">
+      <TableHead>
+        <TableRow>
+          <TableCell>Name</TableCell>
+          <TableCell>Price</TableCell>
+          <TableCell>Change</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {coins?.map((coin, index) => (
+          <TableBodyRow key={`${coin.name}${index}`} coin={coin} />
+        ))}
+      </TableBody>
+    </MUITable>
+  );
 }
 
 export default Table;
