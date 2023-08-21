@@ -1,3 +1,32 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f7f7f7;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.scroll-shadow::before {
+    transform: translate(100%);
+    width: 30px;
+    content: "";
+    box-shadow: inset 10px 0 4px -8px #00000025;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: -1px;
+}

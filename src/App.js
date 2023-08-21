@@ -1,9 +1,11 @@
 import React from "react";
 import Table from "./components/Table";
+import Header from "./components/Header";
 
 function App() {
     return (
-        <div className="w-96 h-96">
+        <div className="flex flex-col w-96 h-96 overflow-hidden whitespace-nowrap">
+            <Header />
             <Table />
         </div>
     );

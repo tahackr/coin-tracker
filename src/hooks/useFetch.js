@@ -2,45 +2,37 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function useFetch(url) {
-  const [data, setData] = useState(null);
-  const [isFetching, setIsFetching] = useState(false);
-  const [error, setError] = useState(null);
+    const [data, setData] = useState(null);
+    const [isFetching, setIsFetching] = useState(false);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const source = axios.CancelToken.source();
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                setIsFetching(true);
 
-    const getData = async () => {
-      try {
-        setIsFetching(true);
+                const { data, status } = await axios.get(url, {
+                    signal: AbortSignal.timeout(5000),
+                });
 
-        const { data, status } = await axios.get(url, {
-          cancelToken: source.token,
-        });
+                if (status === 200) {
+                    setData(data);
+                }
+            } catch (err) {
+                if (err.code === "ERR_CANCELED") {
+                    setError(new Error("Request took too long"));
+                } else {
+                    setError(err);
+                }
+            } finally {
+                setIsFetching(false);
+            }
+        };
 
-        if (status === 200) {
-          setData(data);
-        }
-      } catch (err) {
-        if (axios.isCancel(err)) {
-          // process of canceling timed out requests to avoid performance issues.
-          // You can implement any solution for that scenario; console.log is just a placeholder.
-          console.log("Cancelled fetch request.");
-        } else {
-          setError(err);
-        }
-      } finally {
-        setIsFetching(false);
-      }
-    };
+        getData();
+    }, [url]);
 
-    getData();
-
-    return () => {
-      source.cancel();
-    };
-  }, [url]);
-
-  return { data, isFetching, error };
+    return { data, isFetching, error };
 }
 
 export default useFetch;
