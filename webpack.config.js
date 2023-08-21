@@ -3,6 +3,11 @@ const HTMLPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
+    performance: {
+        hints: false,
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000,
+    },
     entry: {
         index: "./src/index.js",
     },
@@ -20,7 +25,7 @@ module.exports = {
             {
                 exclude: /node_modules/,
                 test: /\.css$/i,
-                use: ["style-loader", "css-loader"],
+                use: ["style-loader", "css-loader", "postcss-loader"],
             },
         ],
     },
@@ -32,6 +37,13 @@ module.exports = {
     ],
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
+        fallback: {
+            crypto: require.resolve("crypto-browserify"),
+            stream: require.resolve("stream-browserify"),
+            buffer: require.resolve("buffer/"),
+            os: require.resolve("os-browserify/browser"),
+            path: require.resolve("path-browserify"),
+        },
     },
     output: {
         path: path.join(__dirname, "dist/js"),
