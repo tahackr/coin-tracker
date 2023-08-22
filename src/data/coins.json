@@ -1,17 +1,92 @@
 [
-  {
-    "name": "Bitcoin",
-    "price": "50000",
-    "change": "2.5"
-  },
-  {
-    "name": "Ethereum",
-    "price": "3300",
-    "change": "-1.2"
-  },
-  {
-    "name": "Ripple",
-    "price": "1.05",
-    "change": "-0.5"
-  }
+    {
+        "name": "Bitcoin",
+        "quote": {
+            "USD": {
+                "price": "50000",
+                "percent_change_24h": "11.7",
+                "market_cap": "1251251241"
+            }
+        }
+    },
+    {
+        "name": "Ethereum",
+        "quote": {
+            "USD": {
+                "price": "3300",
+                "percent_change_24h": "11.7",
+                "market_cap": "1251251241"
+            }
+        }
+    },
+    {
+        "name": "Ripple",
+        "quote": {
+            "USD": {
+                "price": "1.05",
+                "percent_change_24h": "11.7",
+                "market_cap": "1251251241"
+            }
+        }
+    },
+    {
+        "name": "BNB",
+        "quote": {
+            "USD": {
+                "price": "209",
+                "percent_change_24h": "11.7",
+                "market_cap": "1251251241"
+            }
+        }
+    },
+    {
+        "name": "XRP",
+        "quote": {
+            "USD": {
+                "price": "0.5",
+                "percent_change_24h": "11.7",
+                "market_cap": "1251251241"
+            }
+        }
+    },
+    {
+        "name": "Doge",
+        "quote": {
+            "USD": {
+                "price": "0.06021",
+                "percent_change_24h": "11.7",
+                "market_cap": "1251251241"
+            }
+        }
+    },
+    {
+        "name": "Solana",
+        "quote": {
+            "USD": {
+                "price": "21.08",
+                "percent_change_24h": "11.7",
+                "market_cap": "1251251241"
+            }
+        }
+    },
+    {
+        "name": "TRON",
+        "quote": {
+            "USD": {
+                "price": "0.07449",
+                "percent_change_24h": "11.7",
+                "market_cap": "1251251241"
+            }
+        }
+    },
+    {
+        "name": "Litecoin",
+        "quote": {
+            "USD": {
+                "price": "65.91",
+                "percent_change_24h": "11.7",
+                "market_cap": "1251251241"
+            }
+        }
+    }
 ]
