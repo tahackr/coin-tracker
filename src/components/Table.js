@@ -8,15 +8,28 @@ import {
     TableCell,
 } from "@mui/material";
 import TableBodyRow from "./TableBodyRow";
-import useFetch from "../hooks/useFetch";
 import Skeleton from "./Skeleton";
+import { useFetchCoinsQuery } from "../store";
+import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 function Table() {
-    const { data: coins, isFetching, error } = useFetch("/src/data/coins.json");
+    const coinIds = useSelector((state) => state.coinIds);
+
+    localStorage.setItem("coins", JSON.stringify(coinIds));
+
+    const { data, isFetching, error } = useFetchCoinsQuery(coinIds);
+
+    const coins = [];
+    if (data) {
+        for (const coin of Object.values(data.data)) {
+            coins.push(coin);
+        }
+    }
 
     if (error) {
         return createPortal(
-            <div className="fixed inset-0 bg-white ">
+            <div className="fixed inset-0 bg-white z-50">
                 <h1 className="font-bold text-2xl p-4">
                     OOPS! Something went wrong.
                 </h1>
@@ -33,7 +46,7 @@ function Table() {
     }
 
     return (
-        <MUITable stickyHeader className="!block px-4 h-full overflow-auto">
+        <MUITable stickyHeader className="px-2 h-full overflow-auto">
             <TableHead>
                 <TableRow>
                     <TableCell className="!text-left !p-2 !font-semibold sticky left-0 top-0 !z-20 bg-white">
@@ -48,11 +61,12 @@ function Table() {
                     <TableCell className="!text-end !p-2 !font-semibold sticky top-0 z-10 bg-white">
                         Market Cap
                     </TableCell>
+                    <TableCell></TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
-                {coins?.map((coin, index) => (
-                    <TableBodyRow key={`${coin.name}${index}`} coin={coin} />
+                {coins?.map((coin) => (
+                    <TableBodyRow key={uuidv4()} coin={coin} />
                 ))}
             </TableBody>
         </MUITable>

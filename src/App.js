@@ -4,9 +4,11 @@ import Header from "./components/Header";
 
 function App() {
     return (
-        <div className="flex flex-col w-96 h-96 overflow-hidden whitespace-nowrap">
+        <div className="w-[500px] h-96 overflow-hidden whitespace-nowrap">
             <Header />
-            <Table />
+            <div className="overflow-y-scroll h-[325px]">
+                <Table />
+            </div>
         </div>
     );
 }
