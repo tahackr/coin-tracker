@@ -3,6 +3,9 @@ module.exports = {
     content: ["./src/**/*.{html,js}"],
     theme: {
         extend: {
+            backgroundColor: {
+                listGray: "rgb(252 252 252 / 97%)",
+            },
             keyframes: {
                 shimmer: {
                     "100%": { transform: "translateX(100%)" },

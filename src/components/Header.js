@@ -5,11 +5,12 @@ import { createPortal } from "react-dom";
 // Change the imports before release
 import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addCoinId } from "../store";
 
 function Header() {
     const dispatch = useDispatch();
+    const cachedCoins = useSelector((state) => state.cachedCoins);
     const [adding, setAdding] = useState(false);
     const [value, setValue] = useState("");
     const [skip, setSkip] = useState(true);
@@ -17,17 +18,42 @@ function Header() {
         skip,
     });
 
+    let renderedCoins = [];
+    if (value) {
+        const results = cachedCoins.filter((coin) =>
+            coin.name.toLowerCase().startsWith(value.toLowerCase())
+        );
+
+        for (const [i, coin] of results.entries()) {
+            if (i > 9) break;
+            renderedCoins.push(
+                <li
+                    onClick={() => {
+                        setValue(coin.name);
+                        setSkip(false);
+                    }}
+                    className="cursor-pointer p-2 rounded hover:bg-yellow-600"
+                    key={i}
+                >
+                    {coin.name}
+                </li>
+            );
+        }
+    }
+
     const handleOpenForm = () => {
         setAdding(!adding);
     };
 
     const handleInputChange = (e) => {
-        setValue(e.target.value);
+        if (e.target.value.match(/^[A-Za-z]+$/) || e.target.value === "") {
+            setValue(e.target.value);
+        }
     };
 
     const handleAddCoin = (e) => {
         e.preventDefault();
-        setSkip(false);
+        if (value) setSkip(false);
     };
 
     if (data) {
@@ -71,21 +97,31 @@ function Header() {
                     Add Coin
                 </button>
             ) : (
-                <form noValidate className="flex items-center border rounded">
-                    <input
-                        value={value}
-                        onChange={(e) => handleInputChange(e)}
-                        className="outline-none p-2 rounded"
-                        placeholder="Coin Name e.g. Bitcoin"
-                    />
-                    <button onClick={(e) => handleAddCoin(e)}>
-                        {isFetching ? (
-                            <CircularProgress size={"1.5rem"} />
-                        ) : (
-                            <SendIcon className="p-1" />
-                        )}
-                    </button>
-                </form>
+                <div className="relative flex flex-col">
+                    <form
+                        noValidate
+                        className="relative flex items-center border rounded"
+                    >
+                        <input
+                            value={value}
+                            type="text"
+                            required
+                            onChange={(e) => handleInputChange(e)}
+                            className="outline-none p-2 rounded"
+                            placeholder="Coin Name e.g. Bitcoin"
+                        />
+                        <button onClick={(e) => handleAddCoin(e)}>
+                            {isFetching ? (
+                                <CircularProgress size={"1.5rem"} />
+                            ) : (
+                                <SendIcon className="p-1" />
+                            )}
+                        </button>
+                    </form>
+                    <ul className="flex flex-col w-[187px] absolute top-[37px] left-0 bg-listGray z-40 rounded ">
+                        {renderedCoins}
+                    </ul>
+                </div>
             )}
         </div>
     );

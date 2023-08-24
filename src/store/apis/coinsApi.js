@@ -8,13 +8,6 @@ const coinsApi = createApi({
     endpoints(builder) {
         return {
             fetchCoins: builder.query({
-                /* providesTags: (result) => {
-                    const tags = [];
-                    for (const coin of Object.values(result?.data)) {
-                        tags.push({ type: "Coins", id: coin.id });
-                    }
-                    return tags;
-                }, */
                 query: (coins) => {
                     const queryString = coins.join(",");
                     return {
@@ -27,13 +20,6 @@ const coinsApi = createApi({
                 },
             }),
             addCoin: builder.query({
-                /* providesTags: (result) => {
-                    const tags = [];
-                    for (const coin of Object.values(result.data)) {
-                        tags.push({ type: "Coins", id: coin.id });
-                    }
-                    return tags;
-                }, */
                 query: (coinSlug) => {
                     return {
                         url: `/v2/cryptocurrency/quotes/latest?slug=${coinSlug}`,
@@ -48,5 +34,6 @@ const coinsApi = createApi({
     },
 });
 
-export const { useFetchCoinsQuery, useAddCoinQuery } = coinsApi;
+export const { useFetchCoinsQuery, useAddCoinQuery, useFetchAllCoinsQuery } =
+    coinsApi;
 export { coinsApi };

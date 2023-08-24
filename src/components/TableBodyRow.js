@@ -3,7 +3,7 @@ import { TableRow, TableCell } from "@mui/material";
 // Change the imports before release
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import DeleteIcon from "@mui/icons-material/Delete";
+import ClearIcon from "@mui/icons-material/Clear";
 import ControlDelete from "./DeleteModal";
 
 function TableBodyRow({ coin }) {
@@ -26,7 +26,7 @@ function TableBodyRow({ coin }) {
                     {name}
                 </TableCell>
                 <TableCell className="!text-end !p-2">
-                    ${price.toFixed(2)}
+                    ${+price.toFixed(0) ? price.toFixed(2) : price.toFixed(6)}
                 </TableCell>
                 <TableCell
                     className={`!text-end !p-2 ${
@@ -40,14 +40,20 @@ function TableBodyRow({ coin }) {
                     ) : (
                         <ArrowDropUpIcon />
                     )}
-                    {percent_change_24h.toFixed(2).toString().replace("-", "")}%
+                    {percent_change_24h.toFixed(2).replace("-", "")}%
                 </TableCell>
                 <TableCell className="!text-end !p-2">
-                    ${market_cap.toFixed(0)}
+                    $
+                    {new Intl.NumberFormat(navigator.language, {
+                        notation: "compact",
+                    })
+                        .format(market_cap.toFixed(0))
+                        .toString()
+                        .replace("-", "")}
                 </TableCell>
                 <TableCell className="!text-center !p-0 cursor-pointer">
                     <span onClick={() => setIsModalOpen(true)}>
-                        <DeleteIcon />
+                        <ClearIcon className="text-red-600" />
                     </span>
                 </TableCell>
             </TableRow>
