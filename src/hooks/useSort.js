@@ -4,7 +4,6 @@ function useSort(items) {
     const [sortOrder, setSortOrder] = useState(null);
     const [sortBy, setSortBy] = useState(null);
     if (!items) return;
-    console.log(items);
 
     const setSortColumn = function (value) {
         if (sortBy && value !== sortBy) {
