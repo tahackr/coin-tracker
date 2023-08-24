@@ -62,6 +62,8 @@ function Header() {
     if (data) {
         setAdding(false);
         setValue("");
+        setSkip(true);
+
         for (const coin of Object.values(data.data)) {
             dispatch(addCoinId(coin.id));
         }
