@@ -25,7 +25,6 @@ function Header() {
         );
 
         for (const [i, coin] of results.entries()) {
-            console.log(coin);
             if (i > 9) break;
             renderedCoins.push(
                 <li
