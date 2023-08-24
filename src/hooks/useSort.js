@@ -32,7 +32,9 @@ function useSort(items) {
     if (sortOrder === "ascending") {
         if (sortBy === "change") {
             sortedData = items.toSorted(
-                (a, b) => a.quote.USD.price - b.quote.USD.price
+                (a, b) =>
+                    a.quote.USD.percent_change_24h -
+                    b.quote.USD.percent_change_24h
             );
         } else if (sortBy === "marketcap") {
             sortedData = items.toSorted(
@@ -42,11 +44,13 @@ function useSort(items) {
     } else if (sortOrder === "descending") {
         if (sortBy === "change") {
             sortedData = items.toSorted(
-                (a, b) => b.quote.USD.price - a.quote.USD.price
+                (a, b) =>
+                    b.quote.USD.percent_change_24h -
+                    a.quote.USD.percent_change_24h
             );
         } else if (sortBy === "marketcap") {
             sortedData = items.toSorted(
-                (a, b) => b.quote.USD.price - a.quote.USD.price
+                (a, b) => b.quote.USD.market_cap - a.quote.USD.market_cap
             );
         }
     }

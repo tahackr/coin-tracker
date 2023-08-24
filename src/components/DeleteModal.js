@@ -29,13 +29,11 @@ function ControlDelete({ coin, setIsModalOpen }) {
             onClick={handleClose}
         >
             <div className="absolute flex flex-col justify-between inset-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-56 h-40 p-4 rounded-md shadow-xl">
-                <div className="flex justify-between gap-4 items-start">
-                    <div className="pr-4">{`Are you sure you want to delete "${coin.name}"?`}</div>
-                    <CloseIcon
-                        ref={cancelButtonRef}
-                        className="!h-4 !w-4 translate-x-1/2 -translate-y-1/2 cursor-pointer"
-                    />
-                </div>
+                <div className="pt-1">{`Are you sure you want to delete "${coin.name}"?`}</div>
+                <CloseIcon
+                    ref={cancelButtonRef}
+                    className="fixed top-1.5 right-1.5 !h-4 !w-4 cursor-pointer"
+                />
 
                 <button
                     onClick={handleDelete}
