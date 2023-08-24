@@ -8,6 +8,24 @@ import ControlDelete from "./DeleteModal";
 
 function TableBodyRow({ coin }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const colorToRender = function (value) {
+        if (value > 0) {
+            return "!text-green-600";
+        } else if (value < 0) {
+            return "!text-red-600";
+        } else {
+            return "";
+        }
+    };
+    const iconToRender = function (value) {
+        if (value > 0) {
+            return <ArrowDropUpIcon />;
+        } else if (value < 0) {
+            return <ArrowDropDownIcon />;
+        } else {
+            return "";
+        }
+    };
 
     const calculateDecimalPoints = function (value) {
         const [int, decimal] = String(value).split(".");
@@ -48,17 +66,11 @@ function TableBodyRow({ coin }) {
                     ${calculateDecimalPoints(price)}
                 </TableCell>
                 <TableCell
-                    className={`!text-end !p-2 ${
-                        percent_change_24h > 0
-                            ? "!text-green-600"
-                            : "!text-red-600"
-                    } `}
+                    className={`!text-end !p-2 ${colorToRender(
+                        percent_change_24h
+                    )} `}
                 >
-                    {percent_change_24h < 0 ? (
-                        <ArrowDropDownIcon />
-                    ) : (
-                        <ArrowDropUpIcon />
-                    )}
+                    {iconToRender(percent_change_24h)}
                     {percent_change_24h.toFixed(2).replace("-", "")}%
                 </TableCell>
                 <TableCell className="!text-end !p-2">

@@ -15,6 +15,7 @@ import { v4 as uuidv4 } from "uuid";
 import useSort from "../hooks/useSort";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import HeightIcon from "@mui/icons-material/Height";
 
 function Table() {
     const coinIds = useSelector((state) => state.coinIds);
@@ -72,16 +73,26 @@ function Table() {
                         onClick={() => setSortColumn("change")}
                         className="!text-end !p-2 !font-semibold sticky top-0 z-10 bg-white cursor-pointer"
                     >
+                        {sortBy !== "change" && (
+                            <HeightIcon
+                                className="
+                        !p-1"
+                            />
+                        )}
                         {sortBy === "change" && iconToRender(sortOrder)}24h %
                     </TableCell>
                     <TableCell
                         onClick={() => setSortColumn("marketcap")}
                         sx={{ padding: "0px", paddingLeft: "24px" }}
-                        className={`!text-end pl-6 !font-semibold sticky top-0 z-10 bg-white cursor-pointer ${
-                            sortBy === "marketcap" && "!pl-0"
-                        }`}
+                        className="!text-end pl-6 !font-semibold sticky top-0 z-10 bg-white cursor-pointer"
                     >
                         {sortBy === "marketcap" && iconToRender(sortOrder)}
+                        {sortBy !== "marketcap" && (
+                            <HeightIcon
+                                className="
+                        !p-1"
+                            />
+                        )}
                         Market Cap
                     </TableCell>
                     <TableCell className="!p-0 sticky top-0 z-10 bg-white"></TableCell>
