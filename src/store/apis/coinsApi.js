@@ -30,6 +30,17 @@ const coinsApi = createApi({
                     };
                 },
             }),
+            fetchAllCoins: builder.query({
+                query: () => {
+                    return {
+                        url: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
+                        headers: {
+                            "X-CMC_PRO_API_KEY":
+                                "ab0cf1ed-2b3d-488f-b84e-515d554e6d8a",
+                        },
+                    };
+                },
+            }),
         };
     },
 });

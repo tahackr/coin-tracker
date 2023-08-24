@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import { useAddCoinQuery } from "../store";
-import { createPortal } from "react-dom";
 // Change the imports before release
 import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -18,28 +17,31 @@ function Header() {
         skip,
     });
 
-    let renderedCoins = [];
-    if (value) {
-        const results = cachedCoins.filter((coin) =>
-            coin.name.toLowerCase().startsWith(value.toLowerCase())
-        );
-
-        for (const [i, coin] of results.entries()) {
-            if (i > 9) break;
-            renderedCoins.push(
-                <li
-                    onClick={() => {
-                        setValue(coin.slug);
-                        setSkip(false);
-                    }}
-                    className="cursor-pointer p-2 rounded hover:bg-yellow-600"
-                    key={i}
-                >
-                    {coin.name}
-                </li>
+    const renderedCoins = useMemo(() => {
+        if (value) {
+            const results = cachedCoins.filter((coin) =>
+                coin.name.toLowerCase().startsWith(value.toLowerCase())
             );
+
+            const temp = [];
+            for (const [i, coin] of results.entries()) {
+                if (i > 9) break;
+                temp.push(
+                    <li
+                        onClick={() => {
+                            setValue(coin.slug);
+                            setSkip(false);
+                        }}
+                        className="cursor-pointer p-2 rounded hover:bg-yellow-600"
+                        key={i}
+                    >
+                        {coin.name}
+                    </li>
+                );
+            }
+            return temp;
         }
-    }
+    }, [value, cachedCoins]);
 
     const handleOpenForm = () => {
         setAdding(!adding);
@@ -49,6 +51,7 @@ function Header() {
         if (e.target.value.match(/^[A-Za-z]+$/) || e.target.value === "") {
             setValue(e.target.value);
         }
+        setSkip(true);
     };
 
     const handleAddCoin = (e) => {
@@ -58,26 +61,10 @@ function Header() {
 
     if (data) {
         setAdding(false);
-        setSkip(true);
         setValue("");
         for (const coin of Object.values(data.data)) {
             dispatch(addCoinId(coin.id));
         }
-    }
-
-    if (error) {
-        return createPortal(
-            <div className="fixed inset-0 bg-white z-50">
-                <h1 className="font-bold text-2xl p-4">
-                    OOPS! Something went wrong.
-                </h1>
-                <p className="flex gap-4 p-4">
-                    {error.data.status.error_code}
-                    {error.data.status.error_message}
-                </p>
-            </div>,
-            document.body
-        );
     }
 
     return (
@@ -121,6 +108,11 @@ function Header() {
                     <ul className="flex flex-col w-[187px] absolute top-[37px] left-0 bg-listGray z-40 rounded ">
                         {renderedCoins}
                     </ul>
+                    {error && (
+                        <div className="w-[187px] absolute top-[37px] left-0 bg-listGray z-40">
+                            Couldn't find the coin
+                        </div>
+                    )}
                 </div>
             )}
         </div>

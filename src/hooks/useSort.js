@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function useSort(items) {
     const [sortOrder, setSortOrder] = useState(null);

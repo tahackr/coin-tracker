@@ -1,28 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Table from "./components/Table";
 import Header from "./components/Header";
-import axios from "axios";
 import { useDispatch } from "react-redux";
-import { addFetchedCoins } from "./store";
+import { addFetchedCoins, useFetchAllCoinsQuery } from "./store";
 
 function App() {
+    const { data, error } = useFetchAllCoinsQuery();
     const dispatch = useDispatch();
-    useEffect(() => {
-        const fetchCachedCoins = async function () {
-            const cachedCoins = await axios.get(
-                "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
-                {
-                    cache: "force-cache",
-                    headers: {
-                        "X-CMC_PRO_API_KEY":
-                            "ab0cf1ed-2b3d-488f-b84e-515d554e6d8a",
-                    },
-                }
-            );
-            dispatch(addFetchedCoins(cachedCoins.data.data));
-        };
-        fetchCachedCoins();
-    });
+
+    if (data) {
+        dispatch(addFetchedCoins(data.data));
+    }
+
+    if (error) {
+        return (
+            <div className="flex flex-col gap-4 w-[500px] h-96 text-sm font-medium p-4">
+                <h1>OOPS! Failed to fetch data from the server.</h1>
+                <p>Please reload the extension.</p>
+            </div>
+        );
+    }
+
     return (
         <div className="w-[500px] h-96 overflow-hidden whitespace-nowrap select-none">
             <Header />

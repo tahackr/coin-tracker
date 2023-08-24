@@ -8,12 +8,31 @@ import ControlDelete from "./DeleteModal";
 
 function TableBodyRow({ coin }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const calculateDecimalPoints = function (value) {
+        const [int, decimal] = String(value).split(".");
+        let startIndex;
+
+        if (int < 1) {
+            for (let i = 0; i < decimal.length; i++) {
+                if (Number(decimal[i]) !== 0) {
+                    startIndex = i;
+                    break;
+                }
+            }
+            return Number([int, decimal].join(".")).toFixed(startIndex + 2);
+        }
+
+        return Number([int, decimal].join(".")).toFixed(2);
+    };
     const {
         name,
         quote: {
             USD: { price, percent_change_24h, market_cap },
         },
     } = coin;
+
+    calculateDecimalPoints(price);
 
     return (
         <>
@@ -26,7 +45,7 @@ function TableBodyRow({ coin }) {
                     {name}
                 </TableCell>
                 <TableCell className="!text-end !p-2">
-                    ${+price.toFixed(0) ? price.toFixed(2) : price.toFixed(6)}
+                    ${calculateDecimalPoints(price)}
                 </TableCell>
                 <TableCell
                     className={`!text-end !p-2 ${
@@ -48,7 +67,6 @@ function TableBodyRow({ coin }) {
                         notation: "compact",
                     })
                         .format(market_cap.toFixed(0))
-                        .toString()
                         .replace("-", "")}
                 </TableCell>
                 <TableCell className="!text-center !p-0 cursor-pointer">
