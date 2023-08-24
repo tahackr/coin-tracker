@@ -25,11 +25,12 @@ function Header() {
         );
 
         for (const [i, coin] of results.entries()) {
+            console.log(coin);
             if (i > 9) break;
             renderedCoins.push(
                 <li
                     onClick={() => {
-                        setValue(coin.name);
+                        setValue(coin.slug);
                         setSkip(false);
                     }}
                     className="cursor-pointer p-2 rounded hover:bg-yellow-600"
