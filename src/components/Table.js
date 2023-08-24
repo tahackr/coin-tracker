@@ -23,6 +23,7 @@ function Table() {
     localStorage.setItem("coins", JSON.stringify(coinIds));
 
     const { data, isFetching, error } = useFetchCoinsQuery(coinIds);
+    console.log(coinIds);
 
     const coins = [];
     if (data) {
@@ -41,7 +42,7 @@ function Table() {
         }
     };
 
-    if (error) {
+    if (error && coinIds.length) {
         return createPortal(
             <div className="fixed inset-0 bg-white z-50">
                 <h1 className="font-bold text-2xl p-4">
