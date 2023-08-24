@@ -1,16 +1,18 @@
 {
-  "version": "1.0.0",
-  "manifest_version": 3,
-  "name": "Coin Tracker",
-  "description": "An extension track coin prices",
-  "action": {
-    "default_popup": "dist/js/index.html",
-    "default_title": "Coin Tracker",
-    "default_icon": "coin-svgrepo-com.png"
-  },
-  "icons": {
-    "16": "coin-svgrepo-com.png",
-    "48": "coin-svgrepo-com.png",
-    "128": "coin-svgrepo-com.png"
-  }
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "name": "Coin Tracker",
+    "description": "An extension track coin prices",
+    "action": {
+        "default_popup": "dist/js/index.html",
+        "default_title": "Coin Tracker",
+        "default_icon": "coin-svgrepo-com.png"
+    },
+    "icons": {
+        "16": "coin-svgrepo-com.png",
+        "48": "coin-svgrepo-com.png",
+        "128": "coin-svgrepo-com.png"
+    },
+    "permissions": ["webRequest"],
+    "host_permissions": ["<all_urls>"]
 }
