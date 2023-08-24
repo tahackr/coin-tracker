@@ -8,13 +8,6 @@ const coinsApi = createApi({
     endpoints(builder) {
         return {
             fetchCoins: builder.query({
-                /* providesTags: (result) => {
-                    const tags = [];
-                    for (const coin of Object.values(result?.data)) {
-                        tags.push({ type: "Coins", id: coin.id });
-                    }
-                    return tags;
-                }, */
                 query: (coins) => {
                     const queryString = coins.join(",");
                     return {
@@ -27,16 +20,20 @@ const coinsApi = createApi({
                 },
             }),
             addCoin: builder.query({
-                /* providesTags: (result) => {
-                    const tags = [];
-                    for (const coin of Object.values(result.data)) {
-                        tags.push({ type: "Coins", id: coin.id });
-                    }
-                    return tags;
-                }, */
                 query: (coinSlug) => {
                     return {
                         url: `/v2/cryptocurrency/quotes/latest?slug=${coinSlug}`,
+                        headers: {
+                            "X-CMC_PRO_API_KEY":
+                                "ab0cf1ed-2b3d-488f-b84e-515d554e6d8a",
+                        },
+                    };
+                },
+            }),
+            fetchAllCoins: builder.query({
+                query: () => {
+                    return {
+                        url: "/v1/cryptocurrency/listings/latest",
                         headers: {
                             "X-CMC_PRO_API_KEY":
                                 "ab0cf1ed-2b3d-488f-b84e-515d554e6d8a",
@@ -48,5 +45,6 @@ const coinsApi = createApi({
     },
 });
 
-export const { useFetchCoinsQuery, useAddCoinQuery } = coinsApi;
+export const { useFetchCoinsQuery, useAddCoinQuery, useFetchAllCoinsQuery } =
+    coinsApi;
 export { coinsApi };

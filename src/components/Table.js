@@ -12,6 +12,9 @@ import Skeleton from "./Skeleton";
 import { useFetchCoinsQuery } from "../store";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import useSort from "../hooks/useSort";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 function Table() {
     const coinIds = useSelector((state) => state.coinIds);
@@ -26,6 +29,16 @@ function Table() {
             coins.push(coin);
         }
     }
+    const { sortOrder, sortedData, setSortColumn, sortBy } = useSort(coins);
+    const iconToRender = function (sortOrder) {
+        if (!sortOrder) return;
+
+        if (sortOrder === "ascending") {
+            return <ExpandMoreIcon />;
+        } else {
+            return <ExpandLessIcon />;
+        }
+    };
 
     if (error) {
         return createPortal(
@@ -55,19 +68,33 @@ function Table() {
                     <TableCell className="!text-end !p-2 !font-semibold sticky top-0 z-10 bg-white">
                         Price
                     </TableCell>
-                    <TableCell className="!text-end !p-2 !font-semibold sticky top-0 z-10 bg-white">
-                        24h %
+                    <TableCell
+                        onClick={() => setSortColumn("change")}
+                        className="!text-end !p-2 !font-semibold sticky top-0 z-10 bg-white cursor-pointer"
+                    >
+                        {sortBy === "change" && iconToRender(sortOrder)}24h %
                     </TableCell>
-                    <TableCell className="!text-end !p-2 !font-semibold sticky top-0 z-10 bg-white">
+                    <TableCell
+                        onClick={() => setSortColumn("marketcap")}
+                        sx={{ padding: "0px", paddingLeft: "24px" }}
+                        className={`!text-end pl-6 !font-semibold sticky top-0 z-10 bg-white cursor-pointer ${
+                            sortBy === "marketcap" && "!pl-0"
+                        }`}
+                    >
+                        {sortBy === "marketcap" && iconToRender(sortOrder)}
                         Market Cap
                     </TableCell>
-                    <TableCell></TableCell>
+                    <TableCell className="!p-0 sticky top-0 z-10 bg-white"></TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
-                {coins?.map((coin) => (
-                    <TableBodyRow key={uuidv4()} coin={coin} />
-                ))}
+                {sortedData
+                    ? sortedData?.map((coin) => (
+                          <TableBodyRow key={uuidv4()} coin={coin} />
+                      ))
+                    : coins?.map((coin) => (
+                          <TableBodyRow key={uuidv4()} coin={coin} />
+                      ))}
             </TableBody>
         </MUITable>
     );
