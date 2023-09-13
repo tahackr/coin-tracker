@@ -2,7 +2,7 @@
     "version": "1.0.0",
     "manifest_version": 3,
     "name": "Coin Tracker",
-    "description": "An extension track coin prices",
+    "description": "An extension to track coin prices",
     "action": {
         "default_popup": "dist/js/index.html",
         "default_title": "Coin Tracker",
@@ -13,6 +13,5 @@
         "48": "coin-svgrepo-com.png",
         "128": "coin-svgrepo-com.png"
     },
-    "permissions": ["webRequest"],
-    "host_permissions": ["<all_urls>"]
+    "host_permissions": ["https://pro-api.coinmarketcap.com/*"]
 }
