@@ -96,7 +96,7 @@ function Header() {
                             type="text"
                             required
                             onChange={(e) => handleInputChange(e)}
-                            className="outline-none p-2 rounded"
+                            className="outline-none p-[7px] rounded"
                             placeholder="Coin Name e.g. Bitcoin"
                         />
                         <button onClick={(e) => handleAddCoin(e)}>

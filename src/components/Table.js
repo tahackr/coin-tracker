@@ -15,7 +15,7 @@ import { v4 as uuidv4 } from "uuid";
 import useSort from "../hooks/useSort";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import HeightIcon from "@mui/icons-material/Height";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 
 function Table() {
     const coinIds = useSelector((state) => state.coinIds);
@@ -23,7 +23,6 @@ function Table() {
     localStorage.setItem("coins", JSON.stringify(coinIds));
 
     const { data, isFetching, error } = useFetchCoinsQuery(coinIds);
-    console.log(coinIds);
 
     const coins = [];
     if (data) {
@@ -42,7 +41,10 @@ function Table() {
         }
     };
 
-    if (error && coinIds.length) {
+    if (coinIds.length === 0)
+        return <h2 className="font-bold p-2 text-lg">Add a coin to start!</h2>;
+
+    if (error) {
         return createPortal(
             <div className="fixed inset-0 bg-white z-50">
                 <h1 className="font-bold text-2xl p-4">
@@ -64,7 +66,7 @@ function Table() {
         <MUITable stickyHeader className="px-2 h-full overflow-auto">
             <TableHead>
                 <TableRow>
-                    <TableCell className="!text-left !p-2 !font-semibold sticky left-0 top-0 !z-20 bg-white">
+                    <TableCell className="!text-left !p-2 !font-semibold sticky left-0 top-0 !z-20 bg-white w-full">
                         Name
                     </TableCell>
                     <TableCell className="!text-end !p-2 !font-semibold sticky top-0 z-10 bg-white">
@@ -75,9 +77,9 @@ function Table() {
                         className="!text-end !p-2 !font-semibold sticky top-0 z-10 bg-white cursor-pointer"
                     >
                         {sortBy !== "change" && (
-                            <HeightIcon
+                            <UnfoldMoreIcon
                                 className="
-                        !p-1"
+                        !p-1 !pr-0"
                             />
                         )}
                         {sortBy === "change" && iconToRender(sortOrder)}24h %
@@ -85,13 +87,13 @@ function Table() {
                     <TableCell
                         onClick={() => setSortColumn("marketcap")}
                         sx={{ padding: "0px", paddingLeft: "24px" }}
-                        className="!text-end pl-6 !font-semibold sticky top-0 z-10 bg-white cursor-pointer"
+                        className="!text-end !p-0 !font-semibold sticky top-0 z-10 bg-white cursor-pointer"
                     >
                         {sortBy === "marketcap" && iconToRender(sortOrder)}
                         {sortBy !== "marketcap" && (
-                            <HeightIcon
+                            <UnfoldMoreIcon
                                 className="
-                        !p-1"
+                        !p-1 !pr-0"
                             />
                         )}
                         Market Cap
