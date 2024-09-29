@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const coinIdsSlice = createSlice({
     name: "coinIds",
     initialState: JSON.parse(localStorage.getItem("coins")) || [
-        1, 2, 3, 4, 5, 6, 7,
+        1, 2, 3, 5, 1027, 5426,
     ],
     reducers: {
         addCoinId(state, action) {
