@@ -28,6 +28,9 @@ function TableBodyRow({ coin }) {
     };
 
     const calculateDecimalPoints = function (value) {
+        if(value === null) {
+            return 0
+        }
         const [int, decimal] = String(value).split(".");
         let startIndex;
 
@@ -71,14 +74,14 @@ function TableBodyRow({ coin }) {
                     )} `}
                 >
                     {iconToRender(percent_change_24h)}
-                    {percent_change_24h.toFixed(2).replace("-", "")}%
+                    {percent_change_24h ? percent_change_24h.toFixed(2).replace("-", "") : 0}%
                 </TableCell>
                 <TableCell className="!text-end !p-2">
                     $
                     {new Intl.NumberFormat(navigator.language, {
                         notation: "compact",
                     })
-                        .format(market_cap.toFixed(0))
+                        .format(market_cap ? market_cap.toFixed(0) : 0)
                         .replace("-", "")}
                 </TableCell>
                 <TableCell className="!text-center !p-0 cursor-pointer">
