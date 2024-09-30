@@ -1,5 +1,5 @@
 {
-    "version": "1.0.1",
+    "version": "1.0.4",
     "manifest_version": 3,
     "name": "Coin Tracker",
     "description": "An extension to track coin prices",

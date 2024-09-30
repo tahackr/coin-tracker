@@ -20,7 +20,7 @@ function Header() {
     const renderedCoins = useMemo(() => {
         if (value) {
             const results = cachedCoins.filter((coin) =>
-                coin.name.toLowerCase().startsWith(value.toLowerCase())
+                coin.name.toLowerCase().startsWith(value.toLowerCase()) || coin.symbol.toLowerCase().startsWith(value.toLowerCase())
             );
 
             const temp = [];
